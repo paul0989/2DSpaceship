@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
     private Transform player;
     //太空船
-    private Animator animator;
+    private Animator anim;
     public float speed;
     //隕石速度
     public delegate void ExplodingDelegate(int score);
@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour {
 
     [SerializeField]
     private int score;
+    //分數
 
     public int rangeMin;
     public int rangeMax;
@@ -23,6 +24,11 @@ public class Enemy : MonoBehaviour {
     public AudioClip explosionAudio;
     //音效
 
+    
+    private bool isSinking = false;
+    private float sinkingDoneTime = 0f;//手動計算的死亡時間
+    private EnemySpwan enemyManager;//物件所屬的管理器
+    //物件池
 
     public int GetScore()
     {
@@ -31,21 +37,22 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        /*player = GameObject.FindGameObjectWithTag("Player").transform;
         //找到player
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         Vector3 target= player.position - transform.position;
         //太空船的位置(V1)-隕石目前位置(V2)
         target.Normalize();
         //只取方向不要長度
         GetComponent<Rigidbody2D>().AddForce(target*speed,ForceMode2D.Impulse);
-        audioSource = GetComponent<AudioSource>();
-
+        audioSource = GetComponent<AudioSource>();*/
+        FindPlayer();
     }
 
     private void PlayEffects()
+    //隕石爆炸特效
     {
-        animator.SetTrigger("exploding");
+        anim.SetTrigger("exploding");
         audioSource.Play();
     }
 
@@ -79,9 +86,47 @@ public class Enemy : MonoBehaviour {
             
         }
     }
+    //讓死掉的enemy復活
+    public void Alive(EnemySpwan iEnemyManager)
+    {
+        enemyManager = iEnemyManager;
+
+        //重置Enemy狀態
+        //isDead = false;
+        //isSinking = false;
+        GetComponent<Collider2D>().enabled = true;
+        FindPlayer();
+    }
+
+    public void FindPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //找到player
+        anim = GetComponent<Animator>();
+        Vector3 target = player.position - transform.position;
+        //太空船的位置(V1)-隕石目前位置(V2)
+        target.Normalize();
+        //只取方向不要長度
+        GetComponent<Rigidbody2D>().AddForce(target * speed, ForceMode2D.Impulse);
+        audioSource = GetComponent<AudioSource>();
+
+    }
+
     public void ResetEnemy()
     //隕石爆炸後消失
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        isSinking = true;
+        //告知管理器這隻enemy回池條件達成
+        enemyManager.HandleEnemyDeath(this.gameObject);
+
+        //sinkingDoneTime = Time.time + 2f;
+
     }
+    private bool Query_IsSinkingDone()
+    {
+        return Time.time >= sinkingDoneTime;
+        //當前時間>=怪物死亡時間+兩秒
+    }
+
 }

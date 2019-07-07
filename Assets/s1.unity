@@ -1200,6 +1200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff85017671002324f8d56c161e6e12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ienemy: {fileID: 1342256078304542, guid: 2e6b5daa7b6b2d0488b044d6d3973a80, type: 2}
   enemy: {fileID: 114298910657511496, guid: 2e6b5daa7b6b2d0488b044d6d3973a80, type: 2}
   speed: 1
 --- !u!4 &1444031115

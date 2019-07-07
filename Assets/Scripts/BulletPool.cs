@@ -44,6 +44,7 @@ public class BulletPool : MonoBehaviour {
             if (bullet.isActivity == false)
                 //目前在子彈池裡裡的子彈
             {
+                
                 bullet.transform.position = position;
                 //子彈設定成太空船的位置
                 position.x += bulletPositionOffset;

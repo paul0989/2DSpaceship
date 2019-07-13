@@ -7,6 +7,7 @@ public class ShipController : MonoBehaviour {
     //射擊、太空船爆炸等anim用到
     public float speed = 1;
     //太空船移動速度
+
     private float timer = 0;
     private float shootingTimer = 0.05f;
     //0.05秒可以發射一次
@@ -24,7 +25,8 @@ public class ShipController : MonoBehaviour {
 	void Start () {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-	}
+        //fire  = this.gameObject.transform.GetChild(0).GetChild(0).gameObject; 
+    }
 
     public delegate void ShootDelegate(Vector3 position);
     public static ShootDelegate ShootEvent;
@@ -71,7 +73,7 @@ public class ShipController : MonoBehaviour {
     {
         GetComponent<SpriteRenderer>().enabled=false;
     }
-
+    
 	// Update is called once per frame
 	void Update () {
         moving();

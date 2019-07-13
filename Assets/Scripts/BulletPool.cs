@@ -7,6 +7,8 @@ public class BulletPool : MonoBehaviour {
     public int buffetsize =100;
     //陣列大小
     private float bulletPositionOffset = 0.5f;
+    private float bulletPositionYOffset = 0.5f;
+
     //讓子彈分散開
 
     private Bullet[] bullets;
@@ -34,8 +36,11 @@ public class BulletPool : MonoBehaviour {
         }
     }
     public void genBullets(Vector3 position)
-        //讓子彈池裡的子彈進畫面(太空船現在的位置)
+    //讓子彈池裡的子彈進畫面(太空船現在的位置)Vector3 position
     {
+        position.y += bulletPositionYOffset;
+        position.x -= bulletPositionOffset;
+
         int count = 0;
         //0顆子彈
         foreach (Bullet bullet in bullets)
@@ -44,7 +49,6 @@ public class BulletPool : MonoBehaviour {
             if (bullet.isActivity == false)
                 //目前在子彈池裡裡的子彈
             {
-                
                 bullet.transform.position = position;
                 //子彈設定成太空船的位置
                 position.x += bulletPositionOffset;

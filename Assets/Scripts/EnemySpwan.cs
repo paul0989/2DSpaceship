@@ -32,9 +32,7 @@ public class EnemySpwan : MonoBehaviour {
 
         //初始化Enemy參數
         enemyObj.GetComponent<Enemy>().Alive(this);
-        //初始化Enemy生怪位置/角度
-        enemyObj.transform.position = enemy.SpwanPosition();
-        enemyObj.transform.rotation = Quaternion.identity;
+
         enemyObj.gameObject.SetActive(true);
 
     }

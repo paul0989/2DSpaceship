@@ -95,6 +95,10 @@ public class Enemy : MonoBehaviour {
         //isDead = false;
         //isSinking = false;
         GetComponent<Collider2D>().enabled = true;
+        //初始化Enemy生怪位置/角度
+        transform.position = SpwanPosition();
+        transform.rotation = Quaternion.identity;
+
         FindPlayer();
     }
 
@@ -107,7 +111,10 @@ public class Enemy : MonoBehaviour {
         //太空船的位置(V1)-隕石目前位置(V2)
         target.Normalize();
         //只取方向不要長度
+        Debug.LogWarning("valo：" + GetComponent<Rigidbody2D>().velocity);
         GetComponent<Rigidbody2D>().AddForce(target * speed, ForceMode2D.Impulse);
+        Debug.LogWarning("valo after：" + GetComponent<Rigidbody2D>().velocity);
+
         audioSource = GetComponent<AudioSource>();
 
     }

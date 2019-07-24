@@ -26,14 +26,14 @@ public class EnemySpwan : MonoBehaviour {
 
     private void GenerateEnemy()
     {
-        //Instantiate(enemy.gameObject,enemy.SpwanPosition(),Quaternion.identity);
+        Instantiate(enemy.gameObject,enemy.SpwanPosition(),Quaternion.identity);
         //生怪改使用物件池
-        GameObject enemyObj = enemyPool.GetPoolObject();
+        /*GameObject enemyObj = enemyPool.GetPoolObject();
 
         //初始化Enemy參數
         enemyObj.GetComponent<Enemy>().Alive(this);
 
-        enemyObj.gameObject.SetActive(true);
+        enemyObj.gameObject.SetActive(true);*/
 
     }
 }

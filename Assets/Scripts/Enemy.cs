@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        /*player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         //找到player
         anim = GetComponent<Animator>();
         Vector3 target= player.position - transform.position;
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour {
         target.Normalize();
         //只取方向不要長度
         GetComponent<Rigidbody2D>().AddForce(target*speed,ForceMode2D.Impulse);
-        audioSource = GetComponent<AudioSource>();*/
+        audioSource = GetComponent<AudioSource>();
         FindPlayer();
     }
 
@@ -122,10 +122,10 @@ public class Enemy : MonoBehaviour {
     public void ResetEnemy()
     //隕石爆炸後消失
     {
-        //Destroy(gameObject);
+        Destroy(gameObject);
         isSinking = true;
         //告知管理器這隻enemy回池條件達成
-        enemyManager.HandleEnemyDeath(this.gameObject);
+        //enemyManager.HandleEnemyDeath(this.gameObject);
 
         //sinkingDoneTime = Time.time + 2f;
 

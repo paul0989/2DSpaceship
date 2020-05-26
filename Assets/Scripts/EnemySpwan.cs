@@ -6,22 +6,24 @@ public class EnemySpwan : MonoBehaviour {
     public GameObject ienemy;
     public Enemy enemy;
     public float speed;
-
-    //物件池
+        
     private EnemyPool enemyPool;
+    //物件池
 
     // Use this for initialization
-    void Start () {
-        InvokeRepeating("GenerateEnemy", 0.1f,speed);
-        //"字串方法名稱",首次延遲0.1，每隔speed執行一次
-        //初始化物件池
+    void Start()
+    {
+        InvokeRepeating("GenerateEnemy", 0.1f, speed);
+        //"字串方法名稱",首次延遲0.1，每隔speed執行一次        
         enemyPool = new EnemyPool(ienemy);
+        //初始化物件池
 
     }
+
     public void HandleEnemyDeath(GameObject iGameObject)
-    {
-        //把從enemyHeath得到的達成回池條件怪物回池
+    {        
         enemyPool.ReturnPoolObject(iGameObject);
+        //把從enemyHeath得到的達成回池條件怪物回池
     }
 
     private void GenerateEnemy()
@@ -34,6 +36,6 @@ public class EnemySpwan : MonoBehaviour {
         enemyObj.GetComponent<Enemy>().Alive(this);
 
         enemyObj.gameObject.SetActive(true);*/
-
     }
+
 }

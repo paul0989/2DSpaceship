@@ -5,6 +5,7 @@ using UnityEngine;
 public class BGScroller : MonoBehaviour {
     public float speed = 0.5f;
     //移動速度
+
     public float rangeMax;
     public float rangeMin;
     //當兩張圖在捲動時，碰到下方min點的圖移動到上方max點
@@ -12,7 +13,8 @@ public class BGScroller : MonoBehaviour {
     public Transform[] bgImages;
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         foreach (Transform tf in bgImages)
         //把bgImage裡兩張圖第一張取出放到tf變數裡面，執行完下方{}再回來
         //取出bgImage裡兩張圖第二張放到tf變數裡面，再執行下方{}
@@ -29,6 +31,9 @@ public class BGScroller : MonoBehaviour {
                 tf.position = tmp;
                 //把bg移動到頂部的點
             }
+
         }
-	}
+
+    }
+
 }

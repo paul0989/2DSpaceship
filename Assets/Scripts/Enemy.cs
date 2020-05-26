@@ -5,11 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
     private Transform player;
     //太空船
+
     private Animator anim;
     public float speed;
     //隕石速度
+
     public delegate void ExplodingDelegate(int score);
     //隕石爆炸
+
     public static ExplodingDelegate ExplodinEvent;
 
     [SerializeField]
@@ -26,8 +29,10 @@ public class Enemy : MonoBehaviour {
 
     
     private bool isSinking = false;
-    private float sinkingDoneTime = 0f;//手動計算的死亡時間
-    private EnemySpwan enemyManager;//物件所屬的管理器
+    private float sinkingDoneTime = 0f;
+    //手動計算的死亡時間
+    private EnemySpwan enemyManager;
+    //物件所屬的管理器
     //物件池
 
     public int GetScore()
@@ -35,16 +40,17 @@ public class Enemy : MonoBehaviour {
         return score;
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //找到player
         anim = GetComponent<Animator>();
-        Vector3 target= player.position - transform.position;
+        Vector3 target = player.position - transform.position;
         //太空船的位置(V1)-隕石目前位置(V2)
         target.Normalize();
         //只取方向不要長度
-        GetComponent<Rigidbody2D>().AddForce(target*speed,ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(target * speed, ForceMode2D.Impulse);
         audioSource = GetComponent<AudioSource>();
         FindPlayer();
     }
@@ -68,11 +74,13 @@ public class Enemy : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     //隕石被打到會爆炸
     {
+
         if (collision.tag == "recycling")
         //如果隕石碰到邊界
         {
             ResetEnemy();
         }
+
         if (collision.tag=="bullet")
         {
             PlayEffects();
@@ -85,9 +93,12 @@ public class Enemy : MonoBehaviour {
             }
             
         }
+
     }
-    //讓死掉的enemy復活
+
+    
     public void Alive(EnemySpwan iEnemyManager)
+    //讓死掉的enemy復活
     {
         enemyManager = iEnemyManager;
 
@@ -95,9 +106,10 @@ public class Enemy : MonoBehaviour {
         //isDead = false;
         //isSinking = false;
         GetComponent<Collider2D>().enabled = true;
-        //初始化Enemy生怪位置/角度
+       
         transform.position = SpwanPosition();
         transform.rotation = Quaternion.identity;
+        //初始化Enemy生怪位置/角度
 
         FindPlayer();
     }
@@ -130,6 +142,7 @@ public class Enemy : MonoBehaviour {
         //sinkingDoneTime = Time.time + 2f;
 
     }
+
     private bool Query_IsSinkingDone()
     {
         return Time.time >= sinkingDoneTime;

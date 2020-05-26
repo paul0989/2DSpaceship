@@ -6,9 +6,9 @@ public class BulletPool : MonoBehaviour {
     public GameObject bullet;
     public int buffetsize =100;
     //陣列大小
+
     private float bulletPositionOffset = 0.5f;
     private float bulletPositionYOffset = 0.5f;
-
     //讓子彈分散開
 
     private Bullet[] bullets;
@@ -17,6 +17,7 @@ public class BulletPool : MonoBehaviour {
     {
         ShipController.ShootEvent += genBullets;
     }
+
     private void OnDisable()
     {
         ShipController.ShootEvent -= genBullets;
@@ -35,6 +36,7 @@ public class BulletPool : MonoBehaviour {
             //把子彈放群組下做管理
         }
     }
+
     public void genBullets(Vector3 position)
     //讓子彈池裡的子彈進畫面(太空船現在的位置)Vector3 position
     {
@@ -43,6 +45,7 @@ public class BulletPool : MonoBehaviour {
 
         int count = 0;
         //0顆子彈
+
         foreach (Bullet bullet in bullets)
             //把子彈池裡的子彈取出
         {
@@ -57,18 +60,21 @@ public class BulletPool : MonoBehaviour {
                 //bullet已經在畫面上
                 count++;
             }
+
             if (count == 3)
                 //一次產生三顆子彈
             {
                 break;
             }
+
         }
+
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         initBulletPool();
-
     }
 	
 }

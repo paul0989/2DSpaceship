@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour {
     private int totalScore = 0;
     public GameObject gameOverUI;
     
-
     private void SetScoreText(int score)
     {
         totalScore += score;
@@ -26,6 +25,7 @@ public class UIManager : MonoBehaviour {
     {
         Application.Quit();
     }
+
     public void Replay()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -38,9 +38,11 @@ public class UIManager : MonoBehaviour {
         //爆炸呼叫SetScoreText
         ShipController.GameOverEvent += ShowGameOver;
     }
+
     private void OnDisable()
     {
         Enemy.ExplodinEvent -= SetScoreText;
         ShipController.GameOverEvent -= ShowGameOver;
     }
+
 }
